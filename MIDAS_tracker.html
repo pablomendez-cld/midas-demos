@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>MIDAS · Pipeline</title>
+<style>
+  :root{
+    --bg:#000; --card:#1c1c1e; --card2:#2c2c2e; --line:#38383a;
+    --txt:#fff; --txt2:#98989f; --blue:#0a84ff; --green:#30d158;
+    --orange:#ff9f0a; --red:#ff453a; --purple:#bf5af2; --teal:#64d2ff;
+    --r:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,sans-serif;padding-bottom:60px}
+  .wrap{max-width:680px;margin:0 auto;padding:18px 14px}
+  header{padding:8px 2px 14px}
+  h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+  h1 span{color:var(--orange)}
+  .sub{color:var(--txt2);font-size:13px;margin-top:2px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+  .stat{background:var(--card);border-radius:var(--r);padding:12px 6px;text-align:center}
+  .stat b{display:block;font-size:20px;font-weight:800}
+  .stat small{color:var(--txt2);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
+  .stat.money b{color:var(--green)}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;background:var(--card);border:1px solid var(--line);color:var(--txt2);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer}
+  .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:10px}
+  .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .nm{font-size:16.5px;font-weight:700;line-height:1.25}
+  .meta{color:var(--txt2);font-size:12.5px;margin-top:2px}
+  .star{color:var(--orange);font-weight:700}
+  .badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .bdg{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--card2);color:var(--txt2)}
+  .bdg.tA{background:rgba(255,159,10,.18);color:var(--orange)}
+  .bdg.tB{background:rgba(100,210,255,.15);color:var(--teal)}
+  .bdg.noweb{background:rgba(255,69,58,.15);color:var(--red)}
+  .pill{font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
+  .e0{background:rgba(152,152,159,.18);color:var(--txt2)}
+  .e1{background:rgba(100,210,255,.16);color:var(--teal)}
+  .e2{background:rgba(191,90,242,.16);color:var(--purple)}
+  .e3{background:rgba(10,132,255,.16);color:var(--blue)}
+  .e4{background:rgba(255,159,10,.16);color:var(--orange)}
+  .e5{background:rgba(48,209,88,.18);color:var(--green)}
+  .e6{background:rgba(255,69,58,.15);color:var(--red)}
+  .acts{display:flex;gap:8px;margin-top:12px}
+  .btn{flex:1;border:none;border-radius:12px;padding:11px 6px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;text-decoration:none;display:block;color:#fff}
+  .b-call{background:var(--card2)} .b-wa{background:rgba(48,209,88,.2);color:var(--green)}
+  .b-next{background:var(--blue)} .b-ghost{background:var(--card2);color:var(--txt2)}
+  .det{display:none;margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+  .card.open .det{display:block}
+  label{display:block;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 5px}
+  textarea,input[type=number],input[type=text],select{width:100%;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--txt);padding:10px;font-size:14px;font-family:inherit}
+  textarea{min-height:64px;resize:vertical}
+  .det .acts .b-disc{background:rgba(255,69,58,.15);color:var(--red)}
+  .foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:18px}
+  .foot .btn{background:var(--card);color:var(--txt2);font-size:12.5px}
+  .note{color:var(--txt2);font-size:11.5px;text-align:center;margin-top:14px;line-height:1.5;padding:0 6px}
+  .fab{position:fixed;right:18px;bottom:18px;width:54px;height:54px;border-radius:50%;background:var(--blue);color:#fff;font-size:30px;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(10,132,255,.4);line-height:1}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:10;align-items:flex-end;justify-content:center}
+  .modal.on{display:flex}
+  .sheet{background:var(--card);border-radius:20px 20px 0 0;padding:20px 16px 30px;width:100%;max-width:680px}
+  .sheet h2{font-size:18px;margin-bottom:4px}
+  .empty{text-align:center;color:var(--txt2);padding:40px 20px;font-size:14px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>MIDAS <span>·</span> Pipeline</h1>
+    <div class="sub">Webs en propiedad · pago único · 0€/mes</div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+  <div class="chips" id="chips"></div>
+  <div id="list"></div>
+
+  <div class="foot">
+    <button class="btn" onclick="exportJSON()">Exportar</button>
+    <button class="btn" onclick="document.getElementById('imp').click()">Importar</button>
+    <button class="btn" onclick="loadSeed()">Cargar lote 1</button>
+  </div>
+  <input type="file" id="imp" accept=".json" style="display:none" onchange="importJSON(event)">
+  <div class="note">Datos guardados en este dispositivo. Exporta el JSON como copia de seguridad y para pasarle el estado a Claude (comando: <b>MIDAS estado</b>).<br>Ábrelo en Safari/Chrome; en la vista previa de la app puede no guardar.</div>
+</div>
+
+<button class="fab" onclick="openModal()">+</button>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet">
+    <h2>Nuevo objetivo</h2>
+    <label>Nombre</label><input type="text" id="f-nm">
+    <label>Ciudad</label><input type="text" id="f-ci">
+    <label>Nicho</label><input type="text" id="f-ni" placeholder="Restaurante, taberna…">
+    <label>Teléfono (solo dígitos)</label><input type="text" id="f-te" inputmode="numeric">
+    <label>Notas / ángulo</label><textarea id="f-no"></textarea>
+    <div class="acts">
+      <button class="btn b-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn b-next" onclick="addManual()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ESTADOS=["Detectado","Auditado","Demo lista","Contactado","En conversación","Vendido","Descartado"];
+const ECLS=["e0","e1","e2","e3","e4","e5","e6"];
+const KEY="midas_v1";
+let memFallback=null, filtro="Todos";
+
+const SEED=[
+{id:1,nombre:"Tapería Lega",ciudad:"Badajoz",nicho:"Tapería",rating:4.8,reviews:476,tel:"664227744",telType:"movil",web:"Solo Instagram",tier:"A",estado:"Detectado",precio:null,notas:"Nº17/285 TripAdvisor (4,9). Reservas por MD de Instagram. Ángulo: top-20 de Badajoz sin web."},
+{id:2,nombre:"Mesón el Duende",ciudad:"Zamora",nicho:"Mesón",rating:4.5,reviews:563,tel:"663272300",telType:"movil",web:"Ninguna",tier:"A",estado:"Detectado",precio:null,notas:"Solete Guía Repsol + 50 años de historia y cero web. Barrio San Lázaro."},
+{id:3,nombre:"El Rincón de Mía",ciudad:"Albacete",nicho:"Arrocería",rating:4.6,reviews:248,tel:"680574298",telType:"movil",web:"Ninguna",tier:"A",estado:"Detectado",precio:null,notas:"Arroces por encargo: una web con botón de encargo les resuelve un dolor real. Frente al Mercado de Villacerrada."},
+{id:4,nombre:"Taberna La Herrada",ciudad:"Palencia",nicho:"Taberna",rating:4.7,reviews:498,tel:"979743138",telType:"fijo",web:"Ninguna",tier:"A",estado:"Detectado",precio:null,notas:"Nº8/325 en agregadores. Croquetas de autor, terraza cubierta. Entrar por llamada."},
+{id:5,nombre:"Taberna Do Carril",ciudad:"Vilagarcía de Arousa",nicho:"Marisquería",rating:4.2,reviews:1739,tel:"986507876",telType:"fijo",web:"Ninguna",tier:"A",estado:"Detectado",precio:null,notas:"'O Farturas', institución del marisco. TripAdvisor flojo (3,4): ángulo 'tu web cuenta tu historia'."},
+{id:6,nombre:"Restaurante y tetería Asmae",ciudad:"Albacete",nicho:"Marroquí",rating:4.9,reviews:145,tel:"642560773",telType:"movil",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Decoración riad, repostería. Muy fotogénico."},
+{id:7,nombre:"Restaurante El Laurel",ciudad:"Badajoz",nicho:"Restaurante",rating:4.8,reviews:708,tel:"623335500",telType:"movil",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Cocina creativa, local pequeño."},
+{id:8,nombre:"Degusta Badajoz Campañón",ciudad:"Badajoz",nicho:"Restaurante",rating:4.6,reviews:2224,tel:"681908748",telType:"movil",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Volumen de reseñas enorme."},
+{id:9,nombre:"El Mesón del Zorro",ciudad:"Zamora",nicho:"Mesón",rating:4.7,reviews:1126,tel:"980161647",telType:"fijo",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Menú del día potente, decoración con carácter."},
+{id:10,nombre:"La Condesa",ciudad:"Palencia",nicho:"Bar",rating:4.8,reviews:155,tel:"",telType:"fijo",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Buscar teléfono en F2."},
+{id:11,nombre:"Bar Perico",ciudad:"Palencia",nicho:"Bar de tapas",rating:4.3,reviews:1606,tel:"979740123",telType:"fijo",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Clásico del centro."},
+{id:12,nombre:"Amor de Abuela",ciudad:"Vilagarcía de Arousa",nicho:"Restaurante",rating:4.5,reviews:955,tel:"611791937",telType:"movil",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Decoración cuidada, menú del día."},
+{id:13,nombre:"Restaurante Pepe Quile",ciudad:"Vilagarcía de Arousa",nicho:"Marisquería",rating:4.5,reviews:891,tel:"986504297",telType:"fijo",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Arroces y fideuá de marisco."},
+{id:14,nombre:"Cuatro Sabores",ciudad:"Cuenca",nicho:"Brasería",rating:4.6,reviews:369,tel:"646676185",telType:"movil",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Brasas, centro de Cuenca."},
+{id:15,nombre:"Mesón El Bodegón",ciudad:"Cuenca",nicho:"Mesón",rating:4.4,reviews:2237,tel:"969214029",telType:"fijo",web:"Verificar",tier:"B",estado:"Detectado",precio:null,notas:"Zona turística, mucho volumen."}
+];
+
+function load(){
+  try{const r=localStorage.getItem(KEY); if(r) return JSON.parse(r);}catch(e){}
+  return memFallback||{prospects:[]};
+}
+function save(d){
+  memFallback=d;
+  try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}
+}
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function fmtTel(t){if(!t)return"";return t.replace(/(\d{3})(\d{2})(\d{2})(\d{2})/,"$1 $2 $3 $4");}
+function waLink(t){let d=String(t).replace(/\D/g,"");if(!d.startsWith("34"))d="34"+d;return "https://wa.me/"+d;}
+
+function render(){
+  const d=load(), L=d.prospects;
+  // stats
+  const n=L.length;
+  const cont=L.filter(p=>["Contactado","En conversación","Vendido"].includes(p.estado)).length;
+  const vend=L.filter(p=>p.estado==="Vendido");
+  const eur=vend.reduce((s,p)=>s+(Number(p.precio)||0),0);
+  document.getElementById("stats").innerHTML=
+    `<div class="stat"><b>${n}</b><small>Objetivos</small></div>
+     <div class="stat"><b>${cont}</b><small>Contactados</small></div>
+     <div class="stat"><b>${vend.length}</b><small>Vendidos</small></div>
+     <div class="stat money"><b>${eur.toLocaleString("es-ES")}€</b><small>Cerrado</small></div>`;
+  // chips
+  const cs=["Todos",...ESTADOS];
+  document.getElementById("chips").innerHTML=cs.map(c=>{
+    const k=c==="Todos"?n:L.filter(p=>p.estado===c).length;
+    return `<button class="chip ${filtro===c?"on":""}" onclick="setF('${c}')">${c} ${k?`(${k})`:""}</button>`;
+  }).join("");
+  // list
+  const V=filtro==="Todos"?L:L.filter(p=>p.estado===filtro);
+  const el=document.getElementById("list");
+  if(!n){el.innerHTML=`<div class="empty">Pipeline vacío.<br>Pulsa <b>Cargar lote 1</b> para meter los 15 objetivos verificados.</div>`;return;}
+  if(!V.length){el.innerHTML=`<div class="empty">Nada en "${esc(filtro)}".</div>`;return;}
+  el.innerHTML=V.map(p=>{
+    const ei=ESTADOS.indexOf(p.estado);
+    const canNext=ei>=0&&ei<5;
+    return `<div class="card" id="c${p.id}">
+      <div class="row1" onclick="toggle(${p.id})">
+        <div>
+          <div class="nm">${esc(p.nombre)}</div>
+          <div class="meta">${esc(p.ciudad)} · ${esc(p.nicho)} · <span class="star">★ ${String(p.rating).replace(".",",")}</span> (${p.reviews})</div>
+          <div class="badges">
+            <span class="bdg t${p.tier}">Tier ${p.tier}</span>
+            <span class="bdg ${p.web==="Verificar"?"":"noweb"}">${esc(p.web)==="Verificar"?"Web: verificar":"Web: "+esc(p.web)}</span>
+            ${p.telType==="movil"?'<span class="bdg">móvil</span>':""}
+          </div>
+        </div>
+        <span class="pill ${ECLS[ei]}">${esc(p.estado)}</span>
+      </div>
+      <div class="acts">
+        ${p.tel?`<a class="btn b-call" href="tel:+34${p.tel}">Llamar</a>`:""}
+        ${p.tel&&p.telType==="movil"?`<a class="btn b-wa" href="${waLink(p.tel)}" target="_blank">WhatsApp</a>`:""}
+        ${canNext?`<button class="btn b-next" onclick="advance(${p.id})">→ ${esc(ESTADOS[ei+1])}</button>`:""}
+      </div>
+      <div class="det">
+        <label>Notas / ángulo</label>
+        <textarea onchange="setField(${p.id},'notas',this.value)">${esc(p.notas)}</textarea>
+        <label>Precio (€)</label>
+        <input type="number" value="${p.precio??""}" onchange="setField(${p.id},'precio',this.value)">
+        <label>Estado</label>
+        <select onchange="setField(${p.id},'estado',this.value)">
+          ${ESTADOS.map(e=>`<option ${e===p.estado?"selected":""}>${e}</option>`).join("")}
+        </select>
+        <div class="acts">
+          <button class="btn b-disc" onclick="setField(${p.id},'estado','Descartado')">Descartar</button>
+          <button class="btn b-ghost" onclick="delP(${p.id})">Eliminar</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+function setF(c){filtro=c;render();}
+function toggle(id){document.getElementById("c"+id)?.classList.toggle("open");}
+function advance(id){
+  const d=load(),p=d.prospects.find(x=>x.id===id);if(!p)return;
+  const i=ESTADOS.indexOf(p.estado);
+  if(i>=0&&i<5){p.estado=ESTADOS[i+1];save(d);render();}
+}
+function setField(id,f,v){
+  const d=load(),p=d.prospects.find(x=>x.id===id);if(!p)return;
+  p[f]=f==="precio"?(v===""?null:Number(v)):v;save(d);render();
+}
+function delP(id){
+  if(!confirm("¿Eliminar este objetivo?"))return;
+  const d=load();d.prospects=d.prospects.filter(x=>x.id!==id);save(d);render();
+}
+function loadSeed(){
+  const d=load();
+  const ids=new Set(d.prospects.map(p=>p.nombre+"|"+p.ciudad));
+  let add=0;
+  SEED.forEach(s=>{if(!ids.has(s.nombre+"|"+s.ciudad)){d.prospects.push(JSON.parse(JSON.stringify(s)));add++;}});
+  // reasignar ids únicos
+  let max=0;d.prospects.forEach(p=>{if(p.id>max)max=p.id;});
+  d.prospects.forEach(p=>{if(!p.id)p.id=++max;});
+  save(d);render();
+  if(!add)alert("El lote 1 ya estaba cargado.");
+}
+function openModal(){document.getElementById("modal").classList.add("on");}
+function closeModal(){document.getElementById("modal").classList.remove("on");}
+function addManual(){
+  const nm=document.getElementById("f-nm").value.trim();
+  if(!nm){alert("Falta el nombre.");return;}
+  const d=load();
+  const max=d.prospects.reduce((m,p)=>Math.max(m,p.id||0),0);
+  const tel=document.getElementById("f-te").value.replace(/\D/g,"");
+  d.prospects.push({
+    id:max+1,nombre:nm,
+    ciudad:document.getElementById("f-ci").value.trim(),
+    nicho:document.getElementById("f-ni").value.trim()||"—",
+    rating:"—",reviews:"?",tel,
+    telType:/^(6|7)/.test(tel)?"movil":"fijo",
+    web:"Verificar",tier:"B",estado:"Detectado",precio:null,
+    notas:document.getElementById("f-no").value.trim()
+  });
+  save(d);closeModal();render();
+  ["f-nm","f-ci","f-ni","f-te","f-no"].forEach(i=>document.getElementById(i).value="");
+}
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(load(),null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="midas_pipeline.json";a.click();
+}
+function importJSON(ev){
+  const f=ev.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      if(!d.prospects||!Array.isArray(d.prospects))throw 0;
+      save(d);render();
+    }catch(e){alert("JSON no válido.");}
+  };
+  r.readAsText(f);ev.target.value="";
+}
+render();
+</script>
+</body>
+</html>
