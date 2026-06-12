@@ -1,0 +1,3 @@
+Sube aqui las fotos con estos nombres exactos:
+hero.jpg  p1.jpg  p2.jpg  p3.jpg  p4.jpg
+(El paquete de fotos retocadas ya viene con estos nombres y pesos listos: solo arrastrar.)

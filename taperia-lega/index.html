@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Tapería Lega — Tapas en Badajoz</title>
+<meta name="description" content="Tapería Lega, en Av. María Auxiliadora 8 (Badajoz). Codillo, carpaccios y tapas con oficio. Reservas por WhatsApp: 664 22 77 44.">
+<meta name="theme-color" content="#B23A1A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B23A1A'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23F2EDE6' font-family='Georgia'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2EDE6;--ink:#1D1714;--mut:#6E6258;--acc:#B23A1A;--oli:#66703F;--card:#FFFFFF;--line:#DDD3C6;--max:1060px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font:16px/1.65 "Instrument Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+.note{background:var(--ink);color:var(--bg);font-size:13px;padding:9px 14px;display:flex;gap:12px;justify-content:center;align-items:center;text-align:center}
+.note button{all:unset;cursor:pointer;padding:0 8px;font-size:15px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.brand{font-family:"Bricolage Grotesque";font-weight:800;font-size:21px;letter-spacing:-.02em;text-decoration:none}
+.btn{display:inline-flex;gap:9px;align-items:center;background:var(--acc);color:#fff;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px currentColor}
+.btn.sm{padding:9px 16px;font-size:14px}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--acc)}
+.chip{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600}
+.chip b{color:var(--acc)}
+h1{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(40px,8.5vw,72px);line-height:1.02;letter-spacing:-.025em;margin:14px 0 16px}
+.lede{font-size:18px;color:var(--mut);max-width:48ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero{padding:34px 0 60px;display:grid;gap:34px}
+.media{position:relative;border-radius:18px;overflow:hidden;background:repeating-linear-gradient(45deg,#E8E0D4 0 14px,#EFE8DD 14px 28px)}
+.media img{width:100%;height:100%;object-fit:cover}
+.media.ph::after{content:"foto → " attr(data-f);position:absolute;inset:0;display:grid;place-items:center;font:600 12px/1 "Instrument Sans";letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.hero .media{aspect-ratio:4/3}
+section{padding:62px 0}
+h2{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(28px,5vw,42px);letter-spacing:-.02em;margin:10px 0 8px}
+.sub{color:var(--mut);max-width:52ch}
+.row{display:grid;gap:16px;padding:28px 0;border-top:1px solid var(--line);align-items:center}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row .num{font-family:"Bricolage Grotesque";font-weight:800;font-size:40px;color:var(--acc);line-height:1}
+.row h3{font-family:"Bricolage Grotesque";font-weight:800;font-size:24px;letter-spacing:-.01em}
+.row p{color:var(--mut)}
+.row .media{aspect-ratio:16/9}
+.band{background:var(--ink);color:var(--bg);text-align:center;padding:70px 22px}
+.band .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(72px,16vw,128px);line-height:1;color:#E8C36A}
+.band p{margin:10px auto 0;max-width:42ch;color:#CBC1B5}
+.band .btn{margin-top:26px;background:var(--bg);color:var(--ink)}
+.visit{display:grid;gap:22px}
+.vcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+.vcard h3{font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;margin-bottom:10px}
+.vcard p{color:var(--mut);margin-bottom:6px}
+.map{border:0;width:100%;aspect-ratio:4/3;border-radius:18px;display:block}
+footer{padding:34px 22px 46px;text-align:center;color:var(--mut);font-size:14px}
+@media(min-width:780px){
+ .hero{grid-template-columns:1.05fr .95fr;align-items:center}
+ .hero .media{aspect-ratio:4/5}
+ .row{grid-template-columns:64px 1fr 300px}
+ .visit{grid-template-columns:1fr 1.1fr;align-items:stretch}
+ .map{height:100%;aspect-ratio:auto}
+}
+</style>
+</head>
+<body>
+<div class="note">Maqueta privada preparada para Tapería Lega · fuera de buscadores · se retira si no interesa <button onclick="this.parentElement.remove()" aria-label="Cerrar aviso">✕</button></div>
+
+<div class="wrap">
+<header class="top">
+ <a class="brand" href="#">Tapería Lega</a>
+ <a class="btn sm" href="https://wa.me/34664227744?text=Hola%2C%20quiero%20reservar%20mesa%20en%20Taper%C3%ADa%20Lega">Reservar</a>
+</header>
+
+<section class="hero">
+ <div>
+  <p class="kicker">Tapería · Badajoz</p>
+  <!-- EDITABLE: titular y entradilla -->
+  <h1>Codillo, carpaccios y tapas con oficio.</h1>
+  <p class="lede">Una de las barras mejor valoradas de Badajoz: producto tratado como se debe, raciones para compartir y terraza en María Auxiliadora.</p>
+  <p style="margin-top:18px"><span class="chip">★ <b>4,8</b> en Google · 476 reseñas</span></p>
+  <div class="cta">
+   <a class="btn" href="https://wa.me/34664227744?text=Hola%2C%20quiero%20reservar%20mesa%20en%20Taper%C3%ADa%20Lega">Reservar por WhatsApp</a>
+   <a class="btn line" href="#carta">Los imprescindibles</a>
+  </div>
+ </div>
+ <div class="media" data-f="img/hero.jpg"><img src="img/hero.jpg" alt="Barra y terraza de Tapería Lega" onerror="this.parentElement.classList.add('ph');this.remove()"></div>
+</section>
+
+<section id="carta">
+ <p class="kicker">La carta corta</p>
+ <h2>Lo que pide todo el mundo</h2>
+ <p class="sub">Cuatro clásicos de la casa, por orden de fe ciega. La carta completa, en mesa — y con QR.</p>
+ <!-- EDITABLE: platos y descripciones (sacados de lo más repetido en vuestras reseñas) -->
+ <div style="margin-top:26px">
+  <div class="row"><span class="num">01</span><div><h3>Carpaccio de setas</h3><p>El plato que más se repite en las reseñas. Fino, potente, de los que se piden dos veces.</p></div><div class="media" data-f="img/p1.jpg"><img src="img/p1.jpg" alt="Carpaccio de setas" loading="lazy" onerror="this.parentElement.classList.add('ph');this.remove()"></div></div>
+  <div class="row"><span class="num">02</span><div><h3>Codillo asado</h3><p>Para venir con hambre y salir contento. La razón de muchas visitas.</p></div><div class="media" data-f="img/p2.jpg"><img src="img/p2.jpg" alt="Codillo asado" loading="lazy" onerror="this.parentElement.classList.add('ph');this.remove()"></div></div>
+  <div class="row"><span class="num">03</span><div><h3>Berenjenas con miel</h3><p>Crujientes por fuera, peligrosas en general.</p></div><div class="media" data-f="img/p3.jpg"><img src="img/p3.jpg" alt="Berenjenas con miel" loading="lazy" onerror="this.parentElement.classList.add('ph');this.remove()"></div></div>
+  <div class="row"><span class="num">04</span><div><h3>Morcilla con huevo</h3><p>La tapa de barra definitiva. Y de postre, casero: aquí no se compra nada hecho.</p></div><div class="media" data-f="img/p4.jpg"><img src="img/p4.jpg" alt="Tapa de morcilla con huevo" loading="lazy" onerror="this.parentElement.classList.add('ph');this.remove()"></div></div>
+ </div>
+</section>
+</div>
+
+<section class="band">
+ <p class="kicker" style="color:#E8C36A">Lo dice Badajoz</p>
+ <p class="big">4,8</p>
+ <p>de 5 en Google, con 476 reseñas. Lo que más se repite: trato cercano, raciones generosas y postres caseros.</p>
+ <a class="btn" href="https://www.google.com/maps/place/?q=place_id:ChIJif4G2vnlFg0R_U3uFiAc2p8">Ver las reseñas en Google</a>
+</section>
+
+<div class="wrap">
+<section id="visita">
+ <p class="kicker">Ven a vernos</p>
+ <h2>Mesa, barra o terraza</h2>
+ <div class="visit" style="margin-top:24px">
+  <div class="vcard">
+   <h3>Horario</h3>
+   <!-- EDITABLE: horario (tomado de vuestra ficha de Google, 06/2026) -->
+   <p>Martes a sábado · 12:30–16:00 y 20:30–23:00</p>
+   <p>Domingo · 12:30–16:00</p>
+   <p>Lunes · cerrado</p>
+   <h3 style="margin-top:22px">Dónde</h3>
+   <p>Av. María Auxiliadora, 8 · 06011 Badajoz</p>
+   <p>Tel. <a href="tel:+34664227744">664 22 77 44</a></p>
+   <div class="cta">
+    <a class="btn" href="https://wa.me/34664227744?text=Hola%2C%20quiero%20reservar%20mesa%20en%20Taper%C3%ADa%20Lega">WhatsApp</a>
+    <a class="btn line" href="https://www.google.com/maps/place/?q=place_id:ChIJif4G2vnlFg0R_U3uFiAc2p8">Cómo llegar</a>
+   </div>
+  </div>
+  <iframe class="map" title="Mapa: Tapería Lega, Badajoz" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Taper%C3%ADa%20Lega%2C%20Av.%20Mar%C3%ADa%20Auxiliadora%208%2C%20Badajoz&output=embed"></iframe>
+ </div>
+</section>
+</div>
+
+<footer>
+ <p><strong>Tapería Lega</strong> · Av. María Auxiliadora, 8 · Badajoz · <a href="tel:+34664227744">664 22 77 44</a></p>
+ <p style="margin-top:6px">Página de muestra, no publicada.</p>
+</footer>
+</body>
+</html>
